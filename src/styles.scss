@@ -6,15 +6,22 @@
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat.core();
+
+$krill-app-typography: mat.define-typography-config(
+  $headline: mat.define-typography-level(3rem, 1, 200),
+  $title: mat.define-typography-level(1.5rem, 1, 500),
+  $subheading-2: mat.define-typography-level(1.25rem, 1, 500),
+  $subheading-1: mat.define-typography-level(1.125rem, 1, 300),
+);
+
+@include mat.core($krill-app-typography);
+
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $krill-app-primary: mat.define-palette(mat.$amber-palette, 400);
 $krill-app-accent: mat.define-palette(mat.$blue-palette, 800, 700, 900);
-
-// The warn palette is optional (defaults to red).
 $krill-app-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
@@ -33,6 +40,7 @@ $krill-app-theme: mat.define-light-theme((
 @include mat.all-component-themes($krill-app-theme);
 
 /* You can add global styles to this file, and also import other style files */
+@import "styles/variables";
 
 html, body {
   height: 100%;
@@ -41,4 +49,22 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  font-size: $size-great;
+  font-weight: 200;
+}
+
+h2 {
+  font-size: $size-big;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: $size-big;
+}
+
+h4 {
+  font-size: $size-regular;
 }
