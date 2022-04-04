@@ -1,0 +1,15 @@
+@import "./../../../../styles/variables";
+
+:host {
+  width: 100vw;
+}
+
+section {
+  width: 100%;
+  max-width: $site-width;
+  margin: 0 auto;
+
+  @media screen and (max-width: $desktop) {
+    max-width: 80vw;
+  }
+}

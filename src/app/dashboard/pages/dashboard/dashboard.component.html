@@ -1,5 +1,7 @@
-<p>Dashboard:</p>
+<app-header></app-header>
 
-{{events$ | async | json}}
+<app-site-wrapper>
+  <router-outlet></router-outlet>
+</app-site-wrapper>
 
-<router-outlet></router-outlet>
+<app-footer></app-footer>

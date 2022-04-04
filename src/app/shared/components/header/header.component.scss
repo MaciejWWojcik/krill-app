@@ -1,0 +1,28 @@
+@import "./../../../../styles/variables";
+
+$img-size: 80px;
+
+header {
+  background-color: $accent;
+
+  section {
+    display: flex;
+    align-items: center;
+
+
+    img {
+      width: $img-size;
+      height: $img-size;
+      display: block;
+      margin-left: -22px;
+      margin-right: -10px;
+    }
+
+    p {
+      font-size: $size-big;
+      font-weight: 200;
+      color: $white;
+      margin: 0;
+    }
+  }
+}

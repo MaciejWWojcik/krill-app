@@ -4,12 +4,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:port": "ng serve --port 4300",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "http-server": "http-server -p 4300 -c-1 dist/krill-app",
     "dev:shell": "ng run my-app:app-shell:development",
-    "prod:shell": "ng run my-app:app-shell:production"
+    "prod:shell": "ng run my-app:app-shell:production",
+    "docker": "docker system prune && docker-compose up --build -d"
   },
   "private": true,
   "dependencies": {

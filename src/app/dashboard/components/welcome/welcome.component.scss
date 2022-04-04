@@ -1,0 +1,28 @@
+@import "./../../../../styles/variables";
+
+img {
+  margin-left: 70px;
+  margin-bottom: -65px;
+  height: 36vh;
+}
+
+section {
+  background-color: $accent;
+  color: $white;
+  padding: 2.5rem 1.75rem;
+  border-radius: 1.5rem;
+}
+
+a {
+  padding: 0;
+  white-space: pre-wrap;
+  line-height: 1rem;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+button {
+  margin: 2rem auto 0;
+  display: block;
+  min-width: 80%;
+}

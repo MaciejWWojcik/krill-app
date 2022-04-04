@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EventsApiService } from '../../services/events-api.service';
-import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,15 +9,16 @@ import { Observable } from 'rxjs';
 })
 export class DashboardComponent implements OnInit {
 
-  events$!: Observable<any>;
-
   constructor(
-    private events: EventsApiService,
+    private route: ActivatedRoute,
+    private dashboard: DashboardService,
   ) {
   }
 
-  ngOnInit(): void {
-    this.events$ = this.events.getEvents();
+  ngOnInit() {
+    if (!this.route.snapshot.paramMap.has('id')) {
+      throw Error('Dashboard not found');
+    }
+    this.dashboard.id = this.route.snapshot.paramMap.get('id')!;
   }
-
 }

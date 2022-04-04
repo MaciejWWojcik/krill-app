@@ -1,2 +1,14 @@
-
-<h4>Hey you</h4>
+<img src="/assets/background/start.svg" alt="welcome image">
+<section>
+  <h3>Hey</h3>
+  <p>
+    This is your dashboard, …lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+    ut labore et dolore magna aliqua.
+  </p>
+  <p>Here is your unique link to this dashboard:</p>
+  <a mat-button color="primary" [href]="dashboardUrl" title="Link to your dashboard">{{dashboardUrl}}</a>
+  <p>
+    Remember to share it only with trusted people. Everyone with access to this link will be able to manage your plans!
+  </p>
+  <button mat-raised-button color="primary" (click)="complete()">I understand</button>
+</section>
