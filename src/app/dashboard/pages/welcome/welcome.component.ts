@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { DashboardService } from '../../services/dashboard.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-welcome',
@@ -13,6 +14,8 @@ export class WelcomeComponent implements OnInit {
 
   constructor(
     private dashboard: DashboardService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
   }
 
@@ -22,6 +25,6 @@ export class WelcomeComponent implements OnInit {
   }
 
   complete() {
-
+    void this.router.navigate(['../start'], { relativeTo: this.route });
   }
 }

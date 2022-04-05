@@ -2,14 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { WelcomeComponent } from './components/welcome/welcome.component';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { SharedModule } from '../shared/shared.module';
+import { PlansComponent } from './pages/plans/plans.component';
+import { StartPlanComponent } from './pages/start-plan/start-plan.component';
+import { PlanCreateComponent } from './components/plan-create/plan-create.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    PlansComponent,
+    StartPlanComponent,
+    PlanCreateComponent
   ],
   imports: [
     CommonModule,

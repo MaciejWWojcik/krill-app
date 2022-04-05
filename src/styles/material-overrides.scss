@@ -1,0 +1,7 @@
+.cdk-overlay-container {
+  .cdk-global-overlay-wrapper {
+    @media screen and (max-width: $desktop) {
+      align-items: end !important;
+    }
+  }
+}

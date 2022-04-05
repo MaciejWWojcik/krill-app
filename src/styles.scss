@@ -41,9 +41,11 @@ $krill-app-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 @import "styles/variables";
+@import "styles/material-overrides";
 
 html, body {
   height: 100%;
+  background-color: $background;
 }
 
 body {
@@ -68,3 +70,11 @@ h3 {
 h4 {
   font-size: $size-regular;
 }
+
+h1, h2, h3, h4 {
+  &.regular {
+    font-weight: 300;
+  }
+}
+
+
