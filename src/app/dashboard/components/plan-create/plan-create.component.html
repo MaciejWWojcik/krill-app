@@ -1,1 +1,98 @@
-<p>plan-create works!</p>
+<header>
+  <h4>Create a plan</h4>
+</header>
+
+<form [formGroup]="form">
+
+  <section class="subform main">
+    <p class="title">General</p>
+    <article>
+      <app-emoji-picker formControlName="icon" class="mr"></app-emoji-picker>
+      <mat-form-field class="full-width">
+        <mat-label>Name:</mat-label>
+        <input matInput placeholder="Enter name here..." formControlName="name" [errorStateMatcher]="StateMatcher">
+        <mat-error *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched">
+          Name is required
+        </mat-error>
+      </mat-form-field>
+    </article>
+  </section>
+
+  <section class="subform date">
+    <p class="title">Date</p>
+
+    <p class="subtitle">Occurrences</p>
+    <article>
+      <mat-slide-toggle formControlName="singleOccurrence">
+        {{form.controls['singleOccurrence'].value ? 'Single time' : 'Multiple times'}}
+      </mat-slide-toggle>
+    </article>
+
+    <ng-container *ngIf="!form.controls['singleOccurrence'].value">
+      <article>
+        <mat-form-field class="full-width">
+          <mat-label>How often does it occur</mat-label>
+          <mat-select formControlName="occurrence">
+            <mat-option [value]="Occurrence.EveryYear">Every year</mat-option>
+            <mat-option [value]="Occurrence.EveryMonth">Every month</mat-option>
+            <mat-option [value]="Occurrence.EveryWeek">Every week</mat-option>
+            <mat-option [value]="Occurrence.EveryDay">Every day</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </article>
+    </ng-container>
+
+    <article>
+      <mat-form-field class="full-width">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="startDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.controls['startDate'].hasError('required')">Start date is required</mat-error>
+      </mat-form-field>
+    </article>
+
+    <p class="subtitle">Do you want to specify the deadline?</p>
+    <article>
+      <mat-slide-toggle formControlName="rangeDate">
+        {{form.controls['rangeDate'].value ? 'I’m defining a date range (start - end)' : 'I’m defining a single date'}}
+      </mat-slide-toggle>
+    </article>
+
+    <article *ngIf="form.controls['rangeDate'].value">
+      <mat-form-field class="full-width">
+        <mat-label>Choose an end date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="endDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.hasError('dateOrder')">End date must come after the start date</mat-error>
+        <mat-error *ngIf="form.controls['endDate'].hasError('requiredEndDate')">End date is required</mat-error>
+      </mat-form-field>
+
+    </article>
+  </section>
+
+  <section class="subform details">
+    <p class="title">Details</p>
+    <article>
+      <mat-form-field class="full-width">
+        <mat-label>Description:</mat-label>
+        <textarea matInput placeholder="Enter description here..." formControlName="description"></textarea>
+      </mat-form-field>
+    </article>
+
+    <p class="subtitle">Priority</p>
+    <article>
+      <mat-button-toggle-group formControlName="priority">
+        <mat-button-toggle [value]="Priority.LOW">!</mat-button-toggle>
+        <mat-button-toggle [value]="Priority.Medium">!!</mat-button-toggle>
+        <mat-button-toggle [value]="Priority.High">!!!</mat-button-toggle>
+      </mat-button-toggle-group>
+    </article>
+
+    <!--    TODO: categories-->
+  </section>
+</form>
+<button mat-raised-button color="primary" [disabled]="form.invalid" (click)="create()">
+  Create
+</button>

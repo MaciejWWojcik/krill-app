@@ -3,5 +3,13 @@
     @media screen and (max-width: $desktop) {
       align-items: end !important;
     }
+
+    .cdk-overlay-pane {
+      max-width: 90vw;
+
+      mat-dialog-container {
+        padding: 0;
+      }
+    }
   }
 }

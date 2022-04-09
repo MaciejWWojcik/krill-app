@@ -1,0 +1,13 @@
+<button mat-icon-button (click)="openPicker()">
+  <mat-icon *ngIf="!emoji">insert_emoticon</mat-icon>
+  <ngx-emoji *ngIf="emoji" [emoji]="emoji"></ngx-emoji>
+</button>
+
+
+<ng-template #picker>
+  <emoji-mart title=""
+              [darkMode]="false"
+              [showPreview]="false"
+              [emoji]="emoji"
+              (emojiSelect)="onEmojiSelect($event)"></emoji-mart>
+</ng-template>

@@ -1,0 +1,20 @@
+:host {
+  margin: 0.25em 0;
+  display: block;
+}
+
+button {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
+
+  ngx-emoji {
+    height: 24px;
+    width: 24px;
+    display: block;
+  }
+}

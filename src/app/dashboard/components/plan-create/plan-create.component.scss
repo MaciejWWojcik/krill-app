@@ -1,0 +1,72 @@
+@import "./../../../../styles/variables";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 90vw;
+  max-height: 95vh;
+  max-width: 600px;
+}
+
+button {
+  margin: 1rem;
+}
+
+header {
+  background-color: $accent;
+  color: $white;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+
+  h4 {
+    margin: 0;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  overflow-y: auto;
+
+  section {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid $grey;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .title {
+      font-weight: 500;
+    }
+
+    .subtitle {
+      font-weight: 200;
+      font-size: $size-small;
+    }
+
+    article {
+      display: flex;
+      justify-content: space-between;
+
+      mat-slide-toggle, mat-button-toggle-group {
+        margin-bottom: 1rem;
+      }
+
+      mat-button-toggle {
+        width: 3rem;
+      }
+
+      .full-width {
+        width: 100%;
+      }
+
+      .mr {
+        margin-right: 1rem;
+      }
+    }
+  }
+}

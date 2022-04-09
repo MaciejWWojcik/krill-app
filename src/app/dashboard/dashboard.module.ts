@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PlansComponent } from './pages/plans/plans.component';
 import { StartPlanComponent } from './pages/start-plan/start-plan.component';
 import { PlanCreateComponent } from './components/plan-create/plan-create.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { PlanCreateComponent } from './components/plan-create/plan-create.compon
     CommonModule,
     DashboardRoutingModule,
     SharedModule,
+    ReactiveFormsModule,
   ]
 })
 export class DashboardModule {
