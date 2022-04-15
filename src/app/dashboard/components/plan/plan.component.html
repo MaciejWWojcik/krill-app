@@ -1,0 +1,25 @@
+<div class="panel">
+  <ngx-emoji class="emoji" [emoji]="data.plan.icon || 'eyes'"></ngx-emoji>
+  <button mat-icon-button aria-label="Mark plan as completed" class="done" (click)="onMarkAsCompleted()">
+    <mat-icon>done</mat-icon>
+  </button>
+</div>
+<section class="content">
+  <article>
+    <p class="title">{{data.plan.title}}</p>
+    <p class="date">
+      <span>{{data.plan.date | date:'MMMM d'}}</span>
+      <span *ngIf="data.plan.endDate"> - {{data.plan.endDate | date:'MMMM d'}}</span>
+    </p>
+  </article>
+</section>
+<button mat-icon-button aria-label="Plan actions menu" class="actions" [matMenuTriggerFor]="menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Mark as completed</button>
+  <button mat-menu-item>View details</button>
+  <button mat-menu-item>Edit plan</button>
+  <button mat-menu-item>Delete plan</button>
+</mat-menu>

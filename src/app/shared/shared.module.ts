@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { EmojiPickerComponent } from './components/emoji-picker/emoji-picker.component';
 import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+import { PriorityPipe } from './pipes/priority.pipe';
 
 const components = [
   FooterComponent,
@@ -19,6 +20,7 @@ const components = [
 @NgModule({
   declarations: [
     ...components,
+    PriorityPipe,
   ],
   imports: [
     CommonModule,
@@ -28,12 +30,13 @@ const components = [
     PickerModule,
     EmojiModule,
   ],
-  exports: [
-    ...components,
-    MaterialModule,
-    PickerModule,
-    EmojiModule,
-  ]
+    exports: [
+        ...components,
+        MaterialModule,
+        PickerModule,
+        EmojiModule,
+        PriorityPipe,
+    ]
 })
 export class SharedModule {
 }

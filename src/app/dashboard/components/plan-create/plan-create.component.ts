@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Priority } from '../../../models/priority';
-import { EventsApiService } from '../../services/events-api.service';
 import { Occurrence } from '../../../models/occurrence';
-import { CreateEvent } from '../../../models/create-event';
+import { CreatePlan } from '../../../models/create-plan';
 import { EventType } from '../../../models/event-type';
 import { EventTimeType } from '../../../models/event-time-type';
 import { dateRangeValidator } from '../../../shared/functions/date-range-validator';
 import { StateMatcher } from '../../../shared/functions/state-matcher';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -24,7 +24,7 @@ export class PlanCreateComponent implements OnInit {
   readonly Occurrence = Occurrence;
 
   constructor(
-    private api: EventsApiService,
+    private dialogRef: MatDialogRef<PlanCreateComponent>,
   ) {
   }
 
@@ -49,7 +49,7 @@ export class PlanCreateComponent implements OnInit {
   }
 
   async create() {
-    const event: CreateEvent = {
+    const plan: CreatePlan = {
       title: this.form.controls['name'].value,
       icon: this.form.controls['icon'].value,
       type: this.form.controls['singleOccurrence'].value ? EventType.OneTime : EventType.MultiTime,
@@ -60,14 +60,13 @@ export class PlanCreateComponent implements OnInit {
       categories: [],
     };
 
-    if (event.timeType === EventTimeType.Range) {
-      event.endDate = (<Date>this.form.controls['endDate'].value).toISOString()
+    if (plan.timeType === EventTimeType.Range) {
+      plan.endDate = (<Date>this.form.controls['endDate'].value).toISOString()
     }
-    if (event.type === EventType.MultiTime) {
-      event.occurrence = this.form.controls['occurrence'].value;
+    if (plan.type === EventType.MultiTime) {
+      plan.occurrence = this.form.controls['occurrence'].value;
     }
 
-    await this.api.createEvent(event);
-
+    this.dialogRef.close(plan);
   }
 }

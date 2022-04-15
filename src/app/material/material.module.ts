@@ -10,6 +10,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 const modules = [
   MatButtonModule,
@@ -21,6 +22,7 @@ const modules = [
   MatNativeDateModule,
   MatSelectModule,
   MatIconModule,
+  MatMenuModule,
 ];
 
 @NgModule({

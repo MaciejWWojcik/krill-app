@@ -3,7 +3,6 @@
 </header>
 
 <form [formGroup]="form">
-
   <section class="subform main">
     <p class="title">General</p>
     <article>
@@ -84,7 +83,7 @@
     <p class="subtitle">Priority</p>
     <article>
       <mat-button-toggle-group formControlName="priority">
-        <mat-button-toggle [value]="Priority.LOW">!</mat-button-toggle>
+        <mat-button-toggle [value]="Priority.Low">!</mat-button-toggle>
         <mat-button-toggle [value]="Priority.Medium">!!</mat-button-toggle>
         <mat-button-toggle [value]="Priority.High">!!!</mat-button-toggle>
       </mat-button-toggle-group>

@@ -1,0 +1,80 @@
+@import "./../../../../styles/variables";
+
+$day-size: 36px;
+
+:host {
+  position: absolute;
+  display: flex;
+  min-width: 150px;
+  width: 50%;
+  border-radius: $day-size / 2;
+
+  &:hover {
+    .actions {
+      display: block;
+    }
+  }
+}
+
+.panel {
+  width: $day-size;
+  height: 100%;
+  border-radius: $day-size / 2;
+  margin-right: 8px;
+  background-color: $primary;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #969696;
+  box-sizing: border-box;
+
+  &:hover {
+    .emoji {
+      display: none;
+    }
+
+    .done {
+      display: flex;
+    }
+  }
+
+  .emoji {
+    height: 24px;
+    width: 24px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  .done {
+    display: none;
+    width: $day-size;
+    height: $day-size;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.content {
+  height: 100%;
+
+  article {
+    height: $day-size;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .date {
+    font-size: $size-tiny;
+    line-height: $size-tiny;
+    color: rgba($font-default, .65);
+  }
+}
+
+.actions {
+  display: none;
+}

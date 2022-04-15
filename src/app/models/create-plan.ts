@@ -3,7 +3,7 @@ import { EventTimeType } from './event-time-type';
 import { Priority } from './priority';
 import { Occurrence } from './occurrence';
 
-export interface CreateEvent {
+export interface CreatePlan {
   title: string;
   icon: string;
   type: EventType;
