@@ -9,6 +9,7 @@ import { StartPlanComponent } from './pages/start-plan/start-plan.component';
 import { PlanCreateComponent } from './components/plan-create/plan-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PlanComponent } from './components/plan/plan.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { PlanComponent } from './components/plan/plan.component';
     PlansComponent,
     StartPlanComponent,
     PlanCreateComponent,
-    PlanComponent
+    PlanComponent,
+    TimelineComponent
   ],
   imports: [
     CommonModule,

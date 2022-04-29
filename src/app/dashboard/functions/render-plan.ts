@@ -1,30 +1,45 @@
 import { Plan } from '../../models/plan';
+import { daysDiff } from '../../shared/functions/date-utils';
 
 export class RenderPlanManager {
+
+  public get dayViewSize(): number {
+    return this.daySize;
+  }
+
+  public get startView(): Date {
+    const today = new Date();
+    return today.getTime() < this.plans[0].date.getTime() ? today : this.plans[0].date;
+  }
+
+  public get endView(): Date {
+    const twoMonthsFromToday = new Date(new Date().getTime() + 2 * 30 * 24 * 60 * 60 * 1000);
+    const lastPlan = this.plans[this.plans.length - 1];
+    const lastDate = lastPlan.endDate ? lastPlan.endDate : lastPlan.date;
+    return lastDate.getTime() > twoMonthsFromToday.getTime() ? lastDate : twoMonthsFromToday;
+  }
 
   constructor(
     private readonly plans: Plan[],
     private readonly daySize: number = 36,
     private readonly offsetSize: number = 36 + 16,
   ) {
+    this.plans.sort((a, b) => a.date.getTime() - b.date.getTime());
   }
 
   public toRender(): RenderPlan[] {
-    this.plans.sort((a, b) => a.date.getTime() - b.date.getTime());
-
-    const today = new Date();
-    const viewStartDate = today.getTime() < this.plans[0].date.getTime() ? today : this.plans[0].date;
+    const viewStartDate = this.startView;
     const renderPlans: RenderPlan[] = [];
     const groups: Plan[][] = this.groupPlansByDate(viewStartDate);
 
     groups.forEach(group => {
       group.forEach((plan, index) => {
-        const start = this.daysDiff(plan.date, viewStartDate);
-        const end = this.daysDiff(plan.endDate ?? plan.date, viewStartDate)
+        const start = daysDiff(plan.date, viewStartDate);
+        const end = daysDiff(plan.endDate ?? plan.date, viewStartDate)
         const renderPlan = new RenderPlan(
           plan,
-          this.daySize * (start + 1),
-          this.daySize * (end + 1) + this.daySize,
+          this.daySize * start,
+          this.daySize * end + this.daySize,
           this.offsetSize * index,
         );
         renderPlans.push(renderPlan);
@@ -41,8 +56,8 @@ export class RenderPlanManager {
 
     for (let i = 0; i < this.plans.length; i++) {
       const plan = this.plans[i];
-      const rangeStart = this.daysDiff(plan.date, viewStartDate);
-      const rangeEnd = this.daysDiff(plan.endDate ?? plan.date, viewStartDate);
+      const rangeStart = daysDiff(plan.date, viewStartDate);
+      const rangeEnd = daysDiff(plan.endDate ?? plan.date, viewStartDate);
 
       if (rangeStart > currentEnd) {
         if (currentRange.length > 0) {
@@ -56,12 +71,6 @@ export class RenderPlanManager {
     }
     joinedPlans.push(currentRange);
     return joinedPlans;
-  }
-
-  private daysDiff(date1: Date, date2: Date): number {
-    const oneDay = 1000 * 60 * 60 * 24;
-    const diff = Math.abs(date1.getTime() - date2.getTime());
-    return Math.round(diff / oneDay);
   }
 
 }

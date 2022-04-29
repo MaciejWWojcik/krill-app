@@ -11,6 +11,9 @@ import { RenderPlan, RenderPlanManager } from '../../functions/render-plan';
 export class PlansComponent implements OnInit {
 
   plans$: Observable<RenderPlan[]> | undefined;
+  daySize: number = 0;
+  startTime: Date = new Date();
+  endTime: Date = new Date();
 
   constructor(
     private api: PlansApiService,
@@ -19,7 +22,13 @@ export class PlansComponent implements OnInit {
 
   ngOnInit(): void {
     this.plans$ = this.api.getPlans().pipe(
-      map(plans => new RenderPlanManager(plans).toRender()),
+      map(plans => {
+        const manager = new RenderPlanManager(plans);
+        this.daySize = manager.dayViewSize;
+        this.startTime = manager.startView;
+        this.endTime = manager.endView;
+        return manager.toRender();
+      }),
     );
   }
 

@@ -1,4 +1,8 @@
 <ng-container *ngIf="plans$ | async as plans">
+  <app-timeline [daySize]="daySize"
+                [startTime]="startTime"
+                [endTime]="endTime"></app-timeline>
+
   <section class="plans">
     <app-plan *ngFor="let plan of plans"
               [data]="plan"

@@ -1,13 +1,29 @@
-
 :host {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
+  padding-top: 80px;
+  padding-bottom: 24px;
+  height: 100%;
+}
+
+app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+app-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 app-site-wrapper {
   height: 100%;
-  margin-top: 1rem;
   display: block;
+  padding: 1rem 0;
 }

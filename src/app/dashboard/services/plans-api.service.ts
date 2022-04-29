@@ -31,7 +31,7 @@ const plans: Plan[] = [
   {
     title: 'Plan 1',
     description: 'Description 1',
-    date: new Date('04/14/2022')
+    date: new Date('04/15/2022')
   } as Plan,
   {
     title: 'Plan 2',
@@ -53,6 +53,27 @@ const plans: Plan[] = [
   {
     title: 'Plan 5',
     description: 'Description 5',
-    date: new Date('04/28/2022')
+    date: new Date('05/01/2022')
+  } as Plan,
+  {
+    title: 'Plan 6',
+    description: 'Description 5',
+    date: new Date('06/01/2022')
+  } as Plan,
+  {
+    title: 'Plan 7',
+    description: 'Description 5',
+    date: new Date('07/01/2022'),
+    endDate: new Date('07/31/2022')
+  } as Plan,
+  {
+    title: 'Plan 8',
+    description: 'Description 5',
+    date: new Date('08/1/2022')
+  } as Plan,
+  {
+    title: 'Plan 9',
+    description: 'Description 5',
+    date: new Date('08/05/2022')
   } as Plan,
 ]

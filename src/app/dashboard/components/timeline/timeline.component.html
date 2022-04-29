@@ -1,0 +1,6 @@
+<ng-container *ngFor="let month of months">
+  <div class="month" [style.top.px]="month.position" [style.height.px]="daySize">
+    <p class="name">{{month.name}}</p>
+    <div class="pin"></div>
+  </div>
+</ng-container>
