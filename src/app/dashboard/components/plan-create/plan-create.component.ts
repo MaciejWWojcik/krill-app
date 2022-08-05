@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Priority } from '../../../models/priority';
 import { Occurrence } from '../../../models/occurrence';
 import { CreatePlan } from '../../../models/create-plan';
@@ -17,7 +17,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class PlanCreateComponent implements OnInit {
 
-  form!: FormGroup;
+  form!: UntypedFormGroup;
 
   readonly StateMatcher = new StateMatcher();
   readonly Priority = Priority;
@@ -32,17 +32,17 @@ export class PlanCreateComponent implements OnInit {
     const today = new Date();
     const tomorrow = new Date(new Date().setDate(today.getDate() + 1));
 
-    this.form = new FormGroup({
-      icon: new FormControl(),
-      name: new FormControl('', [Validators.required]),
-      singleOccurrence: new FormControl(true),
-      occurrence: new FormControl(Occurrence.EveryYear),
-      startDate: new FormControl(today, [Validators.required]),
-      rangeDate: new FormControl(false),
-      endDate: new FormControl(tomorrow),
-      description: new FormControl(),
-      priority: new FormControl(Priority.Medium),
-      categories: new FormArray([]),
+    this.form = new UntypedFormGroup({
+      icon: new UntypedFormControl(),
+      name: new UntypedFormControl('', [Validators.required]),
+      singleOccurrence: new UntypedFormControl(true),
+      occurrence: new UntypedFormControl(Occurrence.EveryYear),
+      startDate: new UntypedFormControl(today, [Validators.required]),
+      rangeDate: new UntypedFormControl(false),
+      endDate: new UntypedFormControl(tomorrow),
+      description: new UntypedFormControl(),
+      priority: new UntypedFormControl(Priority.Medium),
+      categories: new UntypedFormArray([]),
     }, [
       dateRangeValidator(),
     ]);

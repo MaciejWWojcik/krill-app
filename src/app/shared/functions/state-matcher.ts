@@ -1,8 +1,8 @@
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormControl, FormGroupDirective } from '@angular/forms';
+import { UntypedFormControl, FormGroupDirective } from '@angular/forms';
 
 export class StateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl, form: FormGroupDirective): boolean {
+  isErrorState(control: UntypedFormControl, form: FormGroupDirective): boolean {
     return control && control.touched && control.invalid;
   }
 }
