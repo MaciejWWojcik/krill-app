@@ -18,8 +18,8 @@
 </button>
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>Mark as completed</button>
-  <button mat-menu-item>View details</button>
-  <button mat-menu-item>Edit plan</button>
-  <button mat-menu-item>Delete plan</button>
+  <button mat-menu-item (click)="onMarkAsCompleted()">Mark as completed</button>
+  <button mat-menu-item (click)="onViewDetails()">View details</button>
+  <button mat-menu-item (click)="onEdit()">Edit plan</button>
+  <button mat-menu-item (click)="onDelete()">Delete plan</button>
 </mat-menu>

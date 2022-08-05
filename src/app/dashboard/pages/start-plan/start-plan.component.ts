@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PlanCreateComponent } from '../../components/plan-create/plan-create.component';
-import { PlansApiService } from '../../services/plans-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { SchedulesApiService } from '../../../services/schedules-api.service';
+import { DashboardService } from '../../../services/dashboard.service';
 
 @Component({
   selector: 'app-start-plan',
@@ -14,7 +15,8 @@ export class StartPlanComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private api: PlansApiService,
+    private dashboard: DashboardService,
+    private api: SchedulesApiService,
     private router: Router,
     private route: ActivatedRoute,
   ) {
@@ -28,7 +30,7 @@ export class StartPlanComponent implements OnInit {
 
     const plan = await firstValueFrom(dialogRef.afterClosed());
     if (plan) {
-      await firstValueFrom(this.api.createPlan(plan));
+      await firstValueFrom(this.api.createPlan(this.dashboard.id, plan));
     }
     await this.router.navigate(['../schedule'], { relativeTo: this.route });
   }

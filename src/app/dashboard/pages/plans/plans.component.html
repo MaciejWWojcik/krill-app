@@ -1,3 +1,7 @@
+<button mat-fab color="primary" (click)="onPlanCreate()">
+  <mat-icon>add</mat-icon>
+</button>
+
 <ng-container *ngIf="plans$ | async as plans">
   <app-timeline [daySize]="daySize"
                 [startTime]="startTime"

@@ -7,8 +7,8 @@ import { PlansComponent } from './pages/plans/plans.component';
 
 const routes: Routes = [
   {
-    path: '', component: DashboardComponent, children: [
-      { path: '', redirectTo: 'plans', pathMatch: 'full' },
+    path: ':id', component: DashboardComponent, children: [
+      { path: '', redirectTo: 'schedule', pathMatch: 'full' },
       { path: 'welcome', component: WelcomeComponent },
       { path: 'start', component: StartPlanComponent },
       { path: 'schedule', component: PlansComponent },

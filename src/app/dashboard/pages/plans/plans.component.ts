@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PlansApiService } from '../../services/plans-api.service';
-import { map, Observable } from 'rxjs';
+import { firstValueFrom, map, Observable, Subject } from 'rxjs';
 import { RenderPlan, RenderPlanManager } from '../../functions/render-plan';
+import { SchedulesApiService } from '../../../services/schedules-api.service';
+import { DashboardService } from '../../../services/dashboard.service';
+import { PlanCreateComponent } from '../../components/plan-create/plan-create.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-plans',
@@ -16,20 +19,24 @@ export class PlansComponent implements OnInit {
   endTime: Date = new Date();
 
   constructor(
-    private api: PlansApiService,
+    private api: SchedulesApiService,
+    private dashboard: DashboardService,
+    private dialog: MatDialog,
   ) {
   }
 
   ngOnInit(): void {
-    this.plans$ = this.api.getPlans().pipe(
-      map(plans => {
-        const manager = new RenderPlanManager(plans);
-        this.daySize = manager.dayViewSize;
-        this.startTime = manager.startView;
-        this.endTime = manager.endView;
-        return manager.toRender();
-      }),
-    );
+    this.refreshPlans();
+  }
+
+  async onPlanCreate() {
+    const dialogRef = this.dialog.open(PlanCreateComponent);
+
+    const plan = await firstValueFrom(dialogRef.afterClosed());
+    if (plan) {
+      await firstValueFrom(this.api.createPlan(this.dashboard.id, plan));
+      this.refreshPlans();
+    }
   }
 
   onViewDetails(plan: RenderPlan) {
@@ -46,6 +53,18 @@ export class PlansComponent implements OnInit {
 
   onMarkAsCompleted(plan: RenderPlan) {
     console.log(plan);
+  }
+
+  private refreshPlans() {
+    this.plans$ = this.api.getSchedule(this.dashboard.id).pipe(
+      map(schedule => {
+        const manager = new RenderPlanManager(schedule.events);
+        this.daySize = manager.dayViewSize;
+        this.startTime = manager.startView;
+        this.endTime = manager.endView;
+        return manager.toRender();
+      }),
+    );
   }
 
 }

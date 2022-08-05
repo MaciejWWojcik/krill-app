@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { DashboardService } from '../../services/dashboard.service';
+import { DashboardService } from '../../../services/dashboard.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

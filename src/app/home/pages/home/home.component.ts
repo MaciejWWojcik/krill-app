@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SchedulesApiService } from '../../../services/schedules-api.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +12,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private api: SchedulesApiService,
   ) {
   }
 
@@ -17,8 +20,8 @@ export class HomeComponent implements OnInit {
   }
 
   start() {
-    // TODO generate/fetch unique dashboard code
-    const dashboard = 'unique-dashboard-id';
-    void this.router.navigate([`/dashboard/${dashboard}/welcome`]);
+    this.api.createSchedule().pipe(
+      tap(schedule => this.router.navigate([`/dashboard/${schedule.scheduleId}/welcome`]))
+    ).subscribe();
   }
 }

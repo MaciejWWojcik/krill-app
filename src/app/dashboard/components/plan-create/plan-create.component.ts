@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Priority } from '../../../models/priority';
 import { Occurrence } from '../../../models/occurrence';
 import { CreatePlan } from '../../../models/create-plan';
@@ -9,6 +9,18 @@ import { dateRangeValidator } from '../../../shared/functions/date-range-validat
 import { StateMatcher } from '../../../shared/functions/state-matcher';
 import { MatDialogRef } from '@angular/material/dialog';
 
+interface PlanForm {
+  icon: FormControl<string>;
+  name: FormControl<string>;
+  singleOccurrence: FormControl<boolean>;
+  occurrence: FormControl<Occurrence>;
+  startDate: FormControl<Date>;
+  rangeDate: FormControl<boolean>;
+  endDate: FormControl<Date>;
+  description: FormControl<string>;
+  priority: FormControl<Priority>;
+  // categories: UntypedFormArray;
+}
 
 @Component({
   selector: 'app-plan-create',
@@ -17,7 +29,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class PlanCreateComponent implements OnInit {
 
-  form!: UntypedFormGroup;
+  form!: FormGroup<PlanForm>;
 
   readonly StateMatcher = new StateMatcher();
   readonly Priority = Priority;
@@ -32,17 +44,16 @@ export class PlanCreateComponent implements OnInit {
     const today = new Date();
     const tomorrow = new Date(new Date().setDate(today.getDate() + 1));
 
-    this.form = new UntypedFormGroup({
-      icon: new UntypedFormControl(),
-      name: new UntypedFormControl('', [Validators.required]),
-      singleOccurrence: new UntypedFormControl(true),
-      occurrence: new UntypedFormControl(Occurrence.EveryYear),
-      startDate: new UntypedFormControl(today, [Validators.required]),
-      rangeDate: new UntypedFormControl(false),
-      endDate: new UntypedFormControl(tomorrow),
-      description: new UntypedFormControl(),
-      priority: new UntypedFormControl(Priority.Medium),
-      categories: new UntypedFormArray([]),
+    this.form = new FormGroup<PlanForm>({
+      icon: new FormControl<string>('', { nonNullable: true }),
+      name: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+      singleOccurrence: new FormControl<boolean>(true, { nonNullable: true }),
+      occurrence: new FormControl<Occurrence>(Occurrence.EveryYear, { nonNullable: true }),
+      startDate: new FormControl<Date>(today, { nonNullable: true, validators: [Validators.required] }),
+      rangeDate: new FormControl<boolean>(false, { nonNullable: true }),
+      endDate: new FormControl<Date>(tomorrow, { nonNullable: true }),
+      description: new FormControl<string>('', { nonNullable: true }),
+      priority: new FormControl<Priority>(Priority.Medium, { nonNullable: true }),
     }, [
       dateRangeValidator(),
     ]);
@@ -50,20 +61,20 @@ export class PlanCreateComponent implements OnInit {
 
   async create() {
     const plan: CreatePlan = {
-      title: this.form.controls['name'].value,
-      icon: this.form.controls['icon'].value,
-      type: this.form.controls['singleOccurrence'].value ? EventType.OneTime : EventType.MultiTime,
-      timeType: this.form.controls['rangeDate'].value ? EventTimeType.Range : EventTimeType.Point,
-      priority: this.form.controls['priority'].value,
-      date: (<Date>this.form.controls['startDate'].value).toISOString(),
-      description: this.form.controls['description'].value,
+      title: this.form.value.name ?? '',
+      icon: this.form.value.icon ?? '',
+      type: this.form.value.occurrence ? EventType.OneTime : EventType.Recurring,
+      timeType: this.form.value.rangeDate ? EventTimeType.Range : EventTimeType.Point,
+      priority: this.form.value.priority ?? Priority.Medium,
+      date: this.form.value.startDate!.toISOString(),
+      description: this.form.value.description ?? '',
       categories: [],
     };
 
     if (plan.timeType === EventTimeType.Range) {
       plan.endDate = (<Date>this.form.controls['endDate'].value).toISOString()
     }
-    if (plan.type === EventType.MultiTime) {
+    if (plan.type === EventType.Recurring) {
       plan.occurrence = this.form.controls['occurrence'].value;
     }
 
