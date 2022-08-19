@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, filter, map, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { BrowserStorageService, StorageKey } from './browser-storage.service';
 
 @Injectable({
@@ -11,13 +11,6 @@ export class DashboardService {
 
   get id(): string {
     return this.idSubject.value ?? '';
-  }
-
-  get id$(): Observable<string> {
-    return this.idSubject.asObservable().pipe(
-      filter(id => id !== null),
-      map(id => id as string),
-    );
   }
 
   set id(value: string) {

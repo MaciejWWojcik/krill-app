@@ -1,4 +1,4 @@
-import { Flavor } from './flavor';
+import { Flavor } from '../util/flavor';
 import { formatPlan, Plan } from './plan';
 
 export type ScheduleId = Flavor<string, 'ScheduleId'>;
