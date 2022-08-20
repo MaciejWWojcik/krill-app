@@ -1,25 +1,31 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HeaderComponent } from './header.component';
+import { getByRole, getByText, render } from '@testing-library/angular';
+import { SiteWrapperComponent } from '../site-wrapper/site-wrapper.component';
 
 describe('HeaderComponent', () => {
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
+  async function setup() {
+    const { fixture, container } = await render(HeaderComponent, {
+      declarations: [
+        SiteWrapperComponent,
+      ],
+    });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ]
-    })
-    .compileComponents();
+    return {
+      fixture,
+      element: fixture.nativeElement,
+      container,
+    }
+  }
+
+
+  it('displays app name and logo', async () => {
+    const { element } = await setup();
+
+    const title = getByText(element, 'Krill Planner');
+    const image = getByRole(element, 'img', { name: 'krill logo' });
+
+    expect(title).toBeInTheDocument();
+    expect(image).toBeInTheDocument();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HeaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });

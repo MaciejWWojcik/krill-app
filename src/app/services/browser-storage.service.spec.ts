@@ -1,16 +1,40 @@
-import { TestBed } from '@angular/core/testing';
-
-import { BrowserStorageService } from './browser-storage.service';
+import { BrowserStorageService, StorageKey } from './browser-storage.service';
+import { createSpyFromClass } from 'jest-auto-spies';
 
 describe('BrowserStorageService', () => {
-  let service: BrowserStorageService;
+  function setup() {
+    const storage = createSpyFromClass(Storage);
+    const service = new BrowserStorageService(storage);
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(BrowserStorageService);
+    return { service, storage };
+  }
+
+  it('gets value from storage', () => {
+    const { service, storage } = setup();
+    storage.getItem.mockReturnValue('value');
+
+    expect(service.get(StorageKey.Schedule)).toBe('value');
+    expect(storage.getItem).toHaveBeenCalledWith(StorageKey.Schedule);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('sets value in storage', () => {
+    const { service, storage } = setup();
+    service.set(StorageKey.Schedule, 'value');
+
+    expect(storage.setItem).toHaveBeenCalledWith(StorageKey.Schedule, 'value');
+  });
+
+  it('removes value from storage', () => {
+    const { service, storage } = setup();
+    service.remove(StorageKey.Schedule);
+
+    expect(storage.removeItem).toHaveBeenCalledWith(StorageKey.Schedule);
+  });
+
+  it('clears storage', () => {
+    const { service, storage } = setup();
+    service.clear();
+
+    expect(storage.clear).toHaveBeenCalled();
   });
 });

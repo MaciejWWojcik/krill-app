@@ -3,10 +3,17 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "types": [
-      "jest"
+      "node",
+      "jest",
+      "@testing-library/jest-dom",
+      "@testing-library/dom",
+      "@testing-library/angular"
     ],
     "module": "CommonJs"
   },
+  "files": [
+    "setup-jest.ts"
+  ],
   "include": [
     "src/**/*.spec.ts",
     "src/**/*.d.ts"

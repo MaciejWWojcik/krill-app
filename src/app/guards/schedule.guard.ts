@@ -43,7 +43,7 @@ export class ScheduleGuard implements CanActivate, CanActivateChild {
     }
 
     this.dashboard.id = schedule;
-    await this.router.navigate([`/dashboard/${schedule}`]);
+    await this.router.navigate(['/dashboard', schedule]);
     return false
   }
 

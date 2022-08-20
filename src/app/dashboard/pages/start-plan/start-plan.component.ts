@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PlanCreateComponent } from '../../components/plan-create/plan-create.component';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { DashboardService } from '../../../services/dashboard.service';
   templateUrl: './start-plan.component.html',
   styleUrls: ['./start-plan.component.scss']
 })
-export class StartPlanComponent implements OnInit {
+export class StartPlanComponent {
 
   constructor(
     private dialog: MatDialog,
@@ -22,17 +22,15 @@ export class StartPlanComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-  }
-
   async createPlan() {
     const dialogRef = this.dialog.open(PlanCreateComponent);
 
     const plan = await firstValueFrom(dialogRef.afterClosed());
     if (plan) {
-      await firstValueFrom(this.api.createPlan(this.dashboard.id, plan));
+      this.api.createPlan(this.dashboard.id, plan).subscribe(() => {
+        this.router.navigate(['../schedule'], { relativeTo: this.route });
+      });
     }
-    await this.router.navigate(['../schedule'], { relativeTo: this.route });
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SchedulesApiService } from '../../../services/schedules-api.service';
 import { tap } from 'rxjs';
@@ -8,7 +8,7 @@ import { tap } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
   constructor(
     private router: Router,
@@ -16,12 +16,9 @@ export class HomeComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-  }
-
   start() {
     this.api.createSchedule().pipe(
-      tap(schedule => this.router.navigate([`/dashboard/${schedule.scheduleId}/welcome`]))
+      tap(schedule => this.router.navigate(['/dashboard', schedule.scheduleId, 'welcome']))
     ).subscribe();
   }
 }

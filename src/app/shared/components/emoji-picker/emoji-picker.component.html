@@ -1,6 +1,6 @@
 <button mat-icon-button (click)="openPicker()">
-  <mat-icon *ngIf="!emoji">insert_emoticon</mat-icon>
-  <ngx-emoji *ngIf="emoji" [emoji]="emoji"></ngx-emoji>
+  <mat-icon *ngIf="!emoji" data-testid="icon">insert_emoticon</mat-icon>
+  <ngx-emoji *ngIf="emoji" [emoji]="emoji" data-testid="emoji"></ngx-emoji>
 </button>
 
 

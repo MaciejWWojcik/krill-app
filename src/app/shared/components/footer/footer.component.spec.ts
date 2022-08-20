@@ -1,25 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FooterComponent } from './footer.component';
+import { getByText, render } from '@testing-library/angular';
 
 describe('FooterComponent', () => {
-  let component: FooterComponent;
-  let fixture: ComponentFixture<FooterComponent>;
+  async function setup() {
+    const { fixture, container } = await render(FooterComponent, {});
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ FooterComponent ]
-    })
-    .compileComponents();
+    return {
+      fixture,
+      element: fixture.nativeElement,
+      container,
+    }
+  }
+
+
+  it('displays app name and logo', async () => {
+    const { element } = await setup();
+
+    const footer = getByText(element, 'Created by Jan & Maciej - 2022');
+
+    expect(footer).toBeInTheDocument();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(FooterComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });

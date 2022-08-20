@@ -1,5 +1,5 @@
 <div class="panel">
-  <ngx-emoji class="emoji" [emoji]="data.plan.icon || 'eyes'"></ngx-emoji>
+  <ngx-emoji class="emoji" [emoji]="data.plan.icon || 'eyes'" data-testid="emoji"></ngx-emoji>
   <button mat-icon-button aria-label="Mark plan as completed" class="done" (click)="onMarkAsCompleted()">
     <mat-icon>done</mat-icon>
   </button>
@@ -13,7 +13,7 @@
     </p>
   </article>
 </section>
-<button mat-icon-button aria-label="Plan actions menu" class="actions" [matMenuTriggerFor]="menu">
+<button mat-icon-button aria-label="Plan actions menu" class="actions" [matMenuTriggerFor]="menu" data-testid="menu">
   <mat-icon>more_vert</mat-icon>
 </button>
 

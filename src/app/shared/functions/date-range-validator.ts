@@ -13,6 +13,7 @@ export function dateRangeValidator(): ValidatorFn {
 
     if (rangeDate && !endDate) {
       (<UntypedFormGroup>form).controls['endDate']?.setErrors({ requiredEndDate: true });
+      return null;
     }
 
     if (new Date(startDate).getTime() >= new Date(endDate).getTime()) {

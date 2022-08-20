@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { firstValueFrom, map, Observable, Subject } from 'rxjs';
+import { firstValueFrom, map, Observable } from 'rxjs';
 import { RenderPlan, RenderPlanManager } from '../../functions/render-plan';
 import { SchedulesApiService } from '../../../services/schedules-api.service';
 import { DashboardService } from '../../../services/dashboard.service';

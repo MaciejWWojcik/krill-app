@@ -30,13 +30,13 @@ const components = [
     PickerModule,
     EmojiModule,
   ],
-    exports: [
-        ...components,
-        MaterialModule,
-        PickerModule,
-        EmojiModule,
-        PriorityPipe,
-    ]
+  exports: [
+    ...components,
+    MaterialModule,
+    PickerModule,
+    EmojiModule,
+    PriorityPipe,
+  ]
 })
 export class SharedModule {
 }

@@ -48,7 +48,7 @@ export class EmojiPickerComponent implements ControlValueAccessor {
     const emoji = event.emoji as EmojiData;
     this.emoji = emoji.id;
     this.onChange(emoji.id);
-    this.dialogRef?.close();
+    this.dialogRef!.close();
 
     this.touched = true;
     this.onTouched();
@@ -63,7 +63,7 @@ export class EmojiPickerComponent implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = true;
+    this.disabled = isDisabled;
   }
 
   writeValue(value: string): void {
