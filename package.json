@@ -55,6 +55,7 @@
       "<rootDir>/setup-jest.ts"
     ],
     "globalSetup": "jest-preset-angular/global-setup",
+    "coverageDirectory": "reports",
     "collectCoverageFrom": [
       "src/app/**/*.ts",
       "!**/node_modules/**",

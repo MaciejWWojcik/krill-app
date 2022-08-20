@@ -16,23 +16,23 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [ 14.x ]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm test
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm test
 
-    - name: Test Report
-      uses: dorny/test-reporter@v1
-      if: success() || failure()    # run this step even if previous step failed
-      with:
-        name: JEST Tests            # Name of the check run which will be created
-        path: reports/jest-*.xml    # Path to test results
-        reporter: jest-junit        # Format of test results
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()    # run this step even if previous step failed
+        with:
+          name: JEST Tests            # Name of the check run which will be created
+          path: reports/clover.xml    # Path to test results
+          reporter: clover        # Format of test results
