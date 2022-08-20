@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "test-coverage": "jest --coverage",
-    "test:integration": "jest --ci --reporters=default --reporters=jest-junit",
+    "test-integration": "jest --ci --reporters=default --reporters=jest-junit",
     "http-server": "http-server -p 4300 -c-1 dist/krill-app",
     "dev:shell": "ng run my-app:app-shell:development",
     "prod:shell": "ng run my-app:app-shell:production",
