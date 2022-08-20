@@ -35,4 +35,4 @@ jobs:
         with:
           name: JEST Tests            # Name of the check run which will be created
           path: reports/coverage-final.json    # Path to test results
-          reporter: json        # Format of test results
+          reporter: jest-junit        # Format of test results
