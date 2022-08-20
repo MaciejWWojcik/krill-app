@@ -34,5 +34,5 @@ jobs:
         if: success() || failure()    # run this step even if previous step failed
         with:
           name: JEST Tests            # Name of the check run which will be created
-          path: reports/clover.xml    # Path to test results
-          reporter: clover        # Format of test results
+          path: reports/coverage-final.json    # Path to test results
+          reporter: json        # Format of test results
